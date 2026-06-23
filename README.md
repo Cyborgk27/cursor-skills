@@ -120,3 +120,4 @@ Ver [CHANGELOG.md](CHANGELOG.md) para detalle completo.
 ## Licencia
 
 [MIT](LICENSE)
+
