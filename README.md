@@ -1,126 +1,122 @@
-# cursor-skills
+# cursor-skills — Adaptado para opencode
 
-Colección personal de Agent Skills para Cursor que amplían las capacidades del asistente con flujos especializados.
+Colección de Agent Skills para **opencode** que amplían las capacidades del asistente con flujos especializados de aprendizaje estructurado.
 
-## 📦 Instalación
+Originalmente diseñado para Cursor, este repositorio fue readaptado para el ecosistema opencode con mejoras significativas en tracking de progreso, sistema de experiencia (XP) y comandos interactivos.
 
-Cada skill vive en su propia carpeta. Instala solo las que necesites.
+## Skills incluidas
 
-### Instalación rápida (recomendada)
+### ai-professor
 
-Con [skills](https://github.com/vercel-labs/skills) puedes instalar una skill directamente desde este repositorio:
+Convierte al agente en un **profesor de élite** que enseña cualquier tema mediante módulos estructurados, ejemplos detallados, prácticas evaluadas y seguimiento de progreso con **XP, niveles y grados** en `PROGRESS.md`.
 
-```bash
-npx skills add https://github.com/alenj0x1/cursor-skills --skill <skill>
-```
+**Novedades respecto a la versión Cursor original:**
+- Sistema de **XP/experiencia** por módulos, prácticas y sesiones
+- **6 comandos interactivos**: `/status`, `/xp`, `/review`, `/grade`, `/history`, `/practice`
+- **Niveles y grados** (S/A/B/C/D) calculados automáticamente
+- **Sincronización híbrida**: PROGRESS.md local + respaldo en `~/.opencode/learning/`
+- Tool `question()` de opencode para diagnóstico interactivo
 
-Ejemplo:
+**Cuándo se activa:**
+- Cuando expresas intención de aprender: "Quiero aprender [tema]", "Enséñame [tema]", "Sé mi profesor", "Crea una ruta de aprendizaje para [tema]", "Arma los módulos para aprender [tema]", "Quiero estudiar [tema]", "ai-professor"
+- Cuando usas comandos: `/status`, `/xp`, `/review`, `/grade`, `/history`, `/practice`
+- Cuando pides continuar un módulo, entregar una práctica o feedback de avance
 
-```bash
-npx skills add https://github.com/alenj0x1/cursor-skills --skill ai-professor
-```
+---
 
-Reinicia Cursor o abre un chat nuevo para que detecte la skill.
+## Instalación en opencode
 
-### Instalación manual
-
-#### 1. Obtener el repositorio
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/alenj0x1/cursor-skills.git
 ```
 
-También puedes descargar el ZIP desde GitHub si no usas Git.
+### 2. Copiar la skill a opencode
 
-#### 2. Copiar la skill
+Copia la carpeta `ai-professor/` a la ubicación de skills de opencode:
 
-Copia la carpeta de la skill que quieras (por ejemplo, `ai-professor/`) a una de estas ubicaciones:
-
-
-| Ámbito                         | Ruta                                                                             |
-| ------------------------------ | -------------------------------------------------------------------------------- |
-| Personal (todos tus proyectos) | `~/.cursor/skills/` en macOS/Linux, o `%USERPROFILE%\.cursor\skills\` en Windows |
-| Por proyecto (solo ese repo)   | `.cursor/skills/` en la raíz del proyecto                                        |
-
-
-Ejemplo en Windows (PowerShell):
-
+**Windows (PowerShell):**
 ```powershell
-Copy-Item -Recurse .\cursor-skills\ai-professor $env:USERPROFILE\.cursor\skills\ai-professor
+Copy-Item -Recurse .\cursor-skills\ai-professor $env:USERPROFILE\.agents\skills\ai-professor
 ```
 
-Ejemplo en macOS/Linux:
-
+**macOS/Linux:**
 ```bash
-cp -r cursor-skills/ai-professor ~/.cursor/skills/ai-professor
+cp -r cursor-skills/ai-professor ~/.agents/skills/ai-professor
 ```
 
-#### 3. Verificar
+### 3. Verificar
 
 La estructura final debe quedar así:
 
 ```
-~/.cursor/skills/ai-professor/
+~/.agents/skills/ai-professor/
 ├── SKILL.md
 └── references/
     ├── interactive-questions.md
+    ├── evaluation-criteria.md
+    ├── content-templates.md
     ├── navigation-conventions.md
-    ├── playground-template.md
-    ├── practice-template.md
-    ├── progress-states.md
-    ├── readme-template.md
+    ├── content-quality-checklist.md
     └── welcome-messages.md
 ```
 
-Reinicia Cursor o abre un chat nuevo para que detecte la skill.
+### 4. Usar en opencode
 
-## 🧠 Skills incluidas
+Escribe en el chat de opencode cualquiera de las frases de activación, o un comando como `/status` una vez que hayas iniciado una ruta de aprendizaje.
 
-### ai-professor
+### Instalación global del respaldo (opcional)
 
-Convierte al agente en un profesor que enseña cualquier tema mediante módulos estructurados, ejemplos detallados, prácticas evaluadas y seguimiento de progreso en `PROGRESS.md`.
+Para que la sincronización híbrida funcione, crea la carpeta global:
 
-**Cuándo se activa:** cuando expresas intención de aprender un tema de forma estructurada, continuar un módulo, entregar una práctica o pedir feedback sobre tu avance.
-
-**Frases que la disparan (ejemplos):**
-
-- «Quiero aprender [tema]»
-- «Enséñame [tema]»
-- «Sé mi profesor»
-- «Crea una ruta de aprendizaje para [tema]»
-- «Arma los módulos para aprender [tema]»
-- «Quiero estudiar [tema]»
-- «ai-professor»
-
-**Cómo usarla en Cursor:** escribe en el chat una de las frases anteriores, o adjunta la skill manualmente con `@` / `/` según tu versión de Cursor.
-
-**Interactividad:** la skill usa la herramienta nativa `AskQuestion` de Cursor para el diagnóstico, validar la ruta de aprendizaje y otras decisiones — verás opciones clicables en lugar de preguntas solo en texto. Funciona de forma fiable en Plan mode; en Agent mode puede depender del modelo. Si no aparece el diálogo, añade esta regla global de usuario:
-
-```
-Use the AskQuestion tool for any interaction requiring user input like choosing between options, confirming a proposed action, or clarifying an ambiguous request.
+```powershell
+# Windows
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.opencode\learning" -Force
 ```
 
-Más info: [foro Cursor sobre AskQuestion en Agent mode](https://forum.cursor.com/t/allow-askquestion-tool-calls-in-agent-mode-or-any-mode/152517).
-
-**Estructura:**
-
+```bash
+# macOS/Linux
+mkdir -p ~/.opencode/learning
 ```
-ai-professor/
-├── SKILL.md                      # Instrucciones completas del agente
-└── references/
-    ├── interactive-questions.md  # Plantillas AskQuestion por fase
-    ├── navigation-conventions.md
-    ├── playground-template.md
-    ├── practice-template.md
-    ├── progress-states.md
-    ├── readme-template.md
-    └── welcome-messages.md
-```
-
-**Documentación completa:** [ai-professor/SKILL.md](ai-professor/SKILL.md)
 
 ---
 
-## 📄 Licencia
+## Estructura del repositorio
 
-Este proyecto está bajo la licencia [MIT](LICENSE).
+```
+cursor-skills/
+├── .cursor/
+│   └── rules/
+│       └── conventional-commits.mdc
+├── ai-professor/
+│   ├── SKILL.md
+│   └── references/
+│       ├── interactive-questions.md
+│       ├── evaluation-criteria.md
+│       ├── content-templates.md
+│       ├── navigation-conventions.md
+│       ├── content-quality-checklist.md
+│       └── welcome-messages.md
+├── CHANGELOG.md
+├── LICENSE
+└── README.md
+```
+
+---
+
+## Historial de adaptación
+
+| Versión | Cambio |
+|---------|--------|
+| 0.3.0 | Adaptación a opencode: XP/niveles/grados, 6 comandos, sync híbrido, fusion de templates, question() tool |
+| 0.2.0 | Versión Cursor con AskQuestion interactivo y 8 referencias |
+| 0.1.0 | Versión Cursor inicial |
+
+Ver [CHANGELOG.md](CHANGELOG.md) para detalle completo.
+
+---
+
+## Licencia
+
+[MIT](LICENSE)
