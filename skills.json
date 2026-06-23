@@ -1,0 +1,15 @@
+{
+  "name": "ai-professor",
+  "description": "Convierte al agente en un profesor que enseña cualquier tema mediante módulos estructurados, prácticas evaluadas y seguimiento de progreso con XP, niveles y grados. Incluye comandos /status, /xp, /review, /grade, /history, /practice.",
+  "agents": ["cursor", "opencode"],
+  "tags": ["learning", "education", "xp", "progress", "spanish", "teaching", "curriculum"],
+  "icon": "🎓",
+  "homepage": "https://github.com/alenj0x1/cursor-skills",
+  "skills": [
+    {
+      "name": "ai-professor",
+      "description": "Structured learning with modules, XP tracking, levels, grades, and 6 interactive commands",
+      "path": "ai-professor"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "cursor-skills",
+  "version": "0.3.0",
+  "description": "Coleccion de Agent Skills para opencode y Cursor - aprendizaje estructurado con XP",
+  "type": "module",
+  "main": "ai-professor/SKILL.md",
+  "scripts": {
+    "postinstall": "node scripts/install.js"
+  },
+  "keywords": ["opencode", "cursor", "skill", "learning", "education", "professor", "xp", "spanish"],
+  "author": "alenj0x1",
+  "license": "MIT",
+  "homepage": "https://github.com/alenj0x1/cursor-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alenj0x1/cursor-skills.git"
+  },
+  "files": ["ai-professor/", "scripts/", "skills.json", "README.md", "LICENSE"]
+}
